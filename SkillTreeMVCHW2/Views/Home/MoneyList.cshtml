@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SkillTreeMVCHW2.Models.Money>
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.Label("#")</th>
+                    <th>@Html.DisplayNameFor(model => model.category)</th>
+                    <th>@Html.DisplayNameFor(model => model.date)</th>
+                    <th>@Html.DisplayNameFor(model => model.money)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 1;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.Label(i.ToString())</td>
+                            <td>@Html.DisplayFor(modelitem => item.categoryName)</td>
+                            <td>@Html.DisplayFor(modelitem => item.date_yyyyMMdd)</td>
+                            <td>@Html.DisplayFor(modelitem => item.moneyShow)</td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
