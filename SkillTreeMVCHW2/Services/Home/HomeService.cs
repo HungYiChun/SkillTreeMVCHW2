@@ -1,22 +1,26 @@
 ﻿using SkillTreeMVCHW2.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SkillTreeMVCHW2.Services.Home
 {
     public class HomeService
     {
         Random random = new Random();
+        private readonly Model1 db = new Model1();
 
         // 記帳資料表
-        public List<Money> moneyList(int Count = 100)
+        public IEnumerable<Money> moneyList(int Count = 100)
         {
-            List<Money> moneyList = new List<Money>();
-            for (int i = 0; i < Count; i++)
+            IEnumerable<Money> moneyList = db.AccountBook.Take(Count).Select(x => new Money()
             {
-                Money item = RandomMoney();
-                moneyList.Add(item);
-            }
+                category = (x.Categoryyy == 0) ? 1 : 2,
+                date = x.Dateee,
+                money = x.Amounttt,
+                PS = x.Remarkkk
+            });               
+            
             return moneyList;
         }
 
