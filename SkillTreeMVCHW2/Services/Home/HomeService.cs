@@ -42,7 +42,7 @@ namespace SkillTreeMVCHW2.Services.Home
         }
 
         // Save DB
-        public void _SaveDB(Money money)
+        public void _SaveDB()
         {
             db.SaveChanges();
         }

@@ -30,6 +30,7 @@ namespace SkillTreeMVCHW2.Controllers
             if (ModelState.IsValid)
             {                
                 TempData["message"] = homeService.createMoney(data);
+                homeService._SaveDB();
             }
 
             return RedirectToAction("Index");
