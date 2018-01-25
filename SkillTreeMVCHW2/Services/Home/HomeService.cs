@@ -13,7 +13,7 @@ namespace SkillTreeMVCHW2.Services.Home
         // 記帳資料表
         public IEnumerable<Money> moneyList(int Count = 100)
         {
-            IEnumerable<Money> moneyList = db.AccountBook.Take(Count).Select(x => new Money()
+            IEnumerable<Money> moneyList = db.AccountBook.OrderByDescending(x => x.Dateee).Take(Count).Select(x => new Money()
             {
                 category = (x.Categoryyy == 0) ? 1 : 2,
                 date = x.Dateee,
@@ -22,6 +22,29 @@ namespace SkillTreeMVCHW2.Services.Home
             });               
             
             return moneyList;
+        }
+
+        // 新增記帳資料
+        public string createMoney(Money money)
+        {
+            AccountBook accountBook = new AccountBook
+            {
+                Id = Guid.NewGuid(),
+                Categoryyy = (money.category == 1) ? 0 : 1,
+                Amounttt = Convert.ToInt32(money.money),               
+                Dateee = money.date,
+                Remarkkk = money.PS
+            };
+                
+            db.AccountBook.Add(accountBook);
+
+            return "記帳成功";
+        }
+
+        // Save DB
+        public void _SaveDB(Money money)
+        {
+            db.SaveChanges();
         }
 
         // 亂數產生記帳資料

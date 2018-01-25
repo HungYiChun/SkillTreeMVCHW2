@@ -1,4 +1,5 @@
-﻿using SkillTreeMVCHW2.Services.Home;
+﻿using SkillTreeMVCHW2.Models;
+using SkillTreeMVCHW2.Services.Home;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -20,6 +21,18 @@ namespace SkillTreeMVCHW2.Controllers
         public ActionResult MoneyList()
         {
             return View(homeService.moneyList());
+        }
+
+        // POST，Home/CreateMoney，新增記帳資料
+        [HttpPost]
+        public ActionResult CreateMoney(Money data)
+        {
+            if (ModelState.IsValid)
+            {                
+                TempData["message"] = homeService.createMoney(data);
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET，Home/About，關於
